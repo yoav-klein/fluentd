@@ -1,0 +1,10 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: demo-app
+  namespace: default
+spec:
+  containers:
+    - image: yoavklein3/net-tools:latest
+      name: demo-app
+      command: ["bash", "-c", 'while true; do echo \{\"data\":\"kuku\",\"time\":\"22\"\}; sleep 2; done']
