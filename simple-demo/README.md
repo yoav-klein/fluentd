@@ -1,18 +1,10 @@
-# Simple example
+# tail input plugin
 ---
 
-In this demo, we setup fluentd to forward data to OpenSearch.
+Here we deomnstrate the use of the `tail` input plugin.
+We configure a `tail` source on the file `/var/log/mylog.log`.
 
-We have a `docker-compose.yaml` file which runs the following containers:
-1. OpenSearch
-2. OpenSearch Dashboards
-3. Fluentd
-4. httpd
-
-The sources of fluentd are `forward` and `http`.
-The `forward` source receives data from an instance of httpd which runs in the docker-compose configuration.
-
-The `http` source is listening on port 9880 for HTTP requests, and forwards the data received to OpenSearch.
+We forward the events to OpenSearch, same as in the simple example.
 
 ## Usage
 ---
