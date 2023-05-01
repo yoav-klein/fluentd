@@ -18,8 +18,8 @@ services:
       nofile:
         soft: 65536 # Maximum number of open files for the opensearch user - set to at least 65536
         hard: 65536
-          #volumes:
-          #- opensearch-data1:/usr/share/opensearch/data # Creates volume called opensearch-data1 and mounts it to the container
+          #   volumes:
+          #  - opensearch-data1:/usr/share/opensearch/data # Creates volume called opensearch-data1 and mounts it to the container
     ports:
       - 9200:9200 # REST API
       - 9600:9600 # Performance Analyzer
@@ -37,18 +37,32 @@ services:
       DISABLE_SECURITY_DASHBOARDS_PLUGIN: "true"
     networks:
       - opensearch-net
+  web:
+    container_name: web
+    image: httpd
+    links:
+      - "fluentd"
+    ports:
+      - "80:80"
+    networks:
+      - opensearch-net
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: localhost:24224
+        tag: httpd.access
   fluentd:
     container_name: fluentd
     build: ./fluentd
     environment:
       FLUENT_OPENSEARCH_HOST: "opensearch-node"
       FLUENT_OPENSEARCH_PORT: "9200"
-      FLUENT_CONTAINER_TAIL_EXCLUDE_PATH: "/var/log/*ignore*"
     volumes:
-    - ./fluentd/conf:/fluentd/etc
+      - ./fluentd/conf:/fluentd/etc
     ports:
       - "24224:24224"
       - "24224:24224/udp"
+      - "9880:9880"
     networks:
       - opensearch-net
 

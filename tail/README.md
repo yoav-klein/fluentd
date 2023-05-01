@@ -11,6 +11,7 @@ each line in this file is an event, which is tagged with the tag `myapp.access`
 
 Also, we use another output plugin: `stdout`, which just outputs the data to stdout.
 
+
 ## Usage
 ---
 
