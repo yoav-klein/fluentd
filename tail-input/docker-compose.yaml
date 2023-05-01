@@ -1,0 +1,22 @@
+version: "3"
+services:
+ fluentd:
+    container_name: fluentd
+    build: ./fluentd
+    environment:
+      FLUENT_OPENSEARCH_HOST: "opensearch-node"
+      FLUENT_OPENSEARCH_PORT: "9200"
+      FLUENT_CONTAINER_TAIL_EXCLUDE_PATH: "/tmp/log/*ignore*"
+    volumes:
+    - ./fluentd/conf:/fluentd/etc
+    networks:
+      - opensearch-net
+
+volumes:
+  opensearch-data1:
+  opensearch-data2:
+
+networks:
+  opensearch-net:
+
+

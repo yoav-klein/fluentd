@@ -1,0 +1,3 @@
+alias down='docker compose down'
+alias up='docker compose up --build -d'
+alias logs='docker logs fluentd'
