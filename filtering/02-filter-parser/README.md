@@ -1,15 +1,29 @@
-# tail
+# Parser filter
 ---
 
-In this demo, we deomnstrate the use of the `tail` input plugin.
+In this demo, we deomnstrate using the Parser filter plugin.
 
-In this configuration, we use the `tail` input plugin. We configure it to track the file `/tmp/logs/*.log`
-each line in this file is an event, which is tagged with the tag `*.myapp.access`
+The logs that come into fluentd is constructed as such:
+```
+3214 {"level":"DEBUG","msg":"some log message"}
+```
 
-The * is expanded to the file path, with `/` replaced with `.`. So that a line in the file 
-`/tmp/logs/mylog3.log` will be tagged as `tmp.logs.mylog3.log.myapp.access`
+Our `<source>` defines a parsing regex that splits the number from the JSON object, so that 
+a record will look like this:
+```
+{"msg_id":3214,"log_msg":"{"level":"DEBUG","msg":"some log message"}"}
+```
 
-Also, we define an exclude path to exlude any file with `ignore` in the file name.
+Now, we want our record to include the `level` and `msg` fields as fields in the record. Currently
+the `log_msg` is treated as a string.
+
+For this, we use the parser filter plugin, to parse the `log_msg` field as JSON.
+
+And now, a record will look like this:
+```
+{"msg_id":3214,"level":"DEBUG","msg":"some log message"}
+```
+
 
 ## Usage
 ---
@@ -33,4 +47,3 @@ $ docker logs fluentd
 ```
 and you'll see the events on stdout.
 
-Notice that you don't see logs written to the `ignore` file
