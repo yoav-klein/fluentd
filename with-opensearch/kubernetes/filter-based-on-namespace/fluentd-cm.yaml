@@ -25,7 +25,7 @@ data:
       @type grep
       <regexp>
         key $.kubernetes.namespace_name
-        pattern /digi/
+        pattern /foo|bar/
       </regexp> 
      </filter>
     fluent.conf: |-

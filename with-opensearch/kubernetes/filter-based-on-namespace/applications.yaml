@@ -12,16 +12,32 @@ spec:
 kind: Namespace
 apiVersion: v1
 metadata:
-  name: digi
+  name: foo
 ---
 kind: Pod
 apiVersion: v1
 metadata:
-  name: digi-ns-app
-  namespace: digi
+  name: foo-ns-app
+  namespace: foo
 spec:
   containers:
     - image: yoavklein3/net-tools:latest
       name: demo-app
-      command: ["bash", "-c", 'while true; do echo \{\"data\":\"This is from DIGI namespace\"}; sleep 2; done']
+      command: ["bash", "-c", 'while true; do echo \{\"data\":\"This is from FOO namespace\"}; sleep 2; done']
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: bar
+---
+kind: Pod
+apiVersion: v1
+metadata:
+  name: bar-ns-app
+  namespace: bar
+spec:
+  containers:
+    - image: yoavklein3/net-tools:latest
+      name: demo-app
+      command: ["bash", "-c", 'while true; do echo \{\"data\":\"This is from FOO namespace\"}; sleep 2; done']
 
