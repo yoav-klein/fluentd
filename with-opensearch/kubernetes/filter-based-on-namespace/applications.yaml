@@ -1,0 +1,27 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: default-ns-app
+  namespace: default
+spec:
+  containers:
+    - image: yoavklein3/net-tools:latest
+      name: demo-app
+      command: ["bash", "-c", 'while true; do echo \{\"data\":\"This is from default namespace\"}; sleep 2; done']
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: digi
+---
+kind: Pod
+apiVersion: v1
+metadata:
+  name: digi-ns-app
+  namespace: digi
+spec:
+  containers:
+    - image: yoavklein3/net-tools:latest
+      name: demo-app
+      command: ["bash", "-c", 'while true; do echo \{\"data\":\"This is from DIGI namespace\"}; sleep 2; done']
+
