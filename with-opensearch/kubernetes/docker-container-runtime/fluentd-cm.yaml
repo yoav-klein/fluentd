@@ -24,7 +24,7 @@ data:
      <filter>
        @type grep
        <regexp>
-         key @.kubernetes.namespace_name
+         key $.kubernetes.namespace_name
          pattern /default/ 
        </regexp>
      </filter>
