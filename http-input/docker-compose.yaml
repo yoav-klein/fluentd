@@ -3,9 +3,6 @@ services:
  fluentd:
     container_name: fluentd
     build: ./fluentd
-    environment:
-      FLUENT_OPENSEARCH_HOST: "opensearch-node"
-      FLUENT_OPENSEARCH_PORT: "9200"
     volumes:
       - ./fluentd/conf:/fluentd/etc
     ports:
