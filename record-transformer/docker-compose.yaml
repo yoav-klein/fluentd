@@ -1,0 +1,19 @@
+services:
+ fluentd:
+    container_name: fluentd
+    build: ./fluentd
+    volumes:
+      - ./fluentd/conf:/fluentd/etc
+    ports:
+      - "9880:9880"
+      - "9881:9881"
+    networks:
+      - opensearch-net
+    environment:
+      CONTEXT: "foofoo"
+
+
+networks:
+  opensearch-net:
+
+
