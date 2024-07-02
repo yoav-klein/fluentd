@@ -40,4 +40,9 @@ $ curl -X POST -d 'json={"event":"some-access"}' localhost:9880/myapp.access
 
 Open OpenSearch Dashboards and look at the `fluentd` index. You'll see the events
 
+## Notes
+---
 
+* We configured the output to be both OpenSearch and stdout - this is for debugging and learning purposes
+* We define an environment variable for the fluentd container: `FLUENT_OPENSEARCH_LOGSTASH_FORMAT: true`. this will make the index name 
+be named `logstash-<date>`, and for each record will add a `@timestamp` field

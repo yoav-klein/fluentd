@@ -57,6 +57,7 @@ services:
     environment:
       FLUENT_OPENSEARCH_HOST: "opensearch-node"
       FLUENT_OPENSEARCH_PORT: "9200"
+      FLUENT_OPENSEARCH_LOGSTASH_FORMAT: true
     volumes:
       - ./fluentd/conf:/fluentd/etc
     ports:
